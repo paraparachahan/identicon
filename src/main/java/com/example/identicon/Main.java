@@ -25,20 +25,10 @@ public final class Main {
         System.out.println(yourName);
 
         int hash = yourName.hashCode();
-        System.out.println(hash);
-
-        String binary = Integer.toBinaryString(hash);
-        System.out.println(binary);
 
         int color = hash & 0xF;
-        System.out.println(color);
-        String colorBinary = Integer.toBinaryString(color);
-        System.out.println(colorBinary);
 
         int panel = hash >>> 4;
-        System.out.println(panel);
-        String panelBinary = Integer.toBinaryString(panel);
-        System.out.println(panelBinary);
 
         boolean iconA[][] = new boolean[7][7];
         boolean iconB[][] = new boolean[7][7];
@@ -74,27 +64,6 @@ public final class Main {
             for (int j = 0; j < 7; j++) {
                 iconB[j][i] = iconB[j][6 - i];
             }
-        }
-        for (int i = 0; i < 7; i++) {
-            for (int j = 0; j < 7; j++) {
-                if (iconA[i][j]) {
-                    System.out.print(1);
-                } else {
-                    System.out.print(0);
-                }
-            }
-            System.out.println();
-        }
-        System.out.println();
-        for (int i = 0; i < 7; i++) {
-            for (int j = 0; j < 7; j++) {
-                if (iconB[i][j]) {
-                    System.out.print(1);
-                } else {
-                    System.out.print(0);
-                }
-            }
-            System.out.println();
         }
 
         Color[] colors = {
