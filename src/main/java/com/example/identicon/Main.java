@@ -2,11 +2,19 @@ package com.example.identicon;
 
 import java.util.Scanner;
 
+import javax.imageio.ImageIO;
+
+import java.awt.Color;
+import java.awt.Graphics2D;
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.IOException;
+
 public final class Main {
     private Main() {
     }
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws IOException {
 
         Scanner scanner = new Scanner(System.in);
 
@@ -89,5 +97,61 @@ public final class Main {
             System.out.println();
         }
 
+        Color[] colors = {
+                new Color(0xD64545),
+                new Color(0xE06B35),
+                new Color(0xD49A28),
+                new Color(0xA6A832),
+                new Color(0x5C9E45),
+                new Color(0x3A9B72),
+                new Color(0x329C9C),
+                new Color(0x3D8DBD),
+                new Color(0x4B72C2),
+                new Color(0x6258B5),
+                new Color(0x7A53B8),
+                new Color(0x9950A5),
+                new Color(0xB84F82),
+                new Color(0xC95D68),
+                new Color(0x6F7D8C),
+                new Color(0x5F6B62)
+        };
+
+        Color iconColor = colors[color];
+
+        int cellSize = 40;
+        int imageSIze = 9 * cellSize;
+
+        BufferedImage imageA = new BufferedImage(imageSIze, imageSIze, BufferedImage.TYPE_INT_ARGB);
+
+        Graphics2D g = imageA.createGraphics();
+        g.setColor(Color.WHITE);
+        g.fillRect(0, 0, imageSIze, imageSIze);
+        g.setColor(iconColor);
+        for (int i = 0; i < 7; i++) {
+            for (int j = 0; j < 7; j++) {
+                if (iconA[i][j]) {
+                    g.fillRect((j + 1) * cellSize, (i + 1) * cellSize, cellSize, cellSize);
+                }
+            }
+        }
+        g.dispose();
+
+        ImageIO.write(imageA, "png", new File("iconA.png"));
+
+        BufferedImage imageB = new BufferedImage(imageSIze, imageSIze, BufferedImage.TYPE_INT_ARGB);
+        Graphics2D h = imageB.createGraphics();
+        h.setColor(Color.WHITE);
+        h.fillRect(0, 0, imageSIze, imageSIze);
+        h.setColor(iconColor);
+        for (int i = 0; i < 7; i++) {
+            for (int j = 0; j < 7; j++) {
+                if (iconB[i][j]) {
+                    h.fillRect((j + 1) * cellSize, (i + 1) * cellSize, cellSize, cellSize);
+                }
+            }
+        }
+        h.dispose();
+
+        ImageIO.write(imageB, "png", new File("iconB.png"));
     }
 }
