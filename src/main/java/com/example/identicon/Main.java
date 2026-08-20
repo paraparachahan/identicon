@@ -16,13 +16,13 @@ public final class Main {
 
     public static void saveImage(boolean[][] icon, Color iconColor, String imageName) throws IOException {
         int cellSize = 40;
-        int imageSIze = 9 * cellSize;
+        int imageSize = 9 * cellSize;
 
-        BufferedImage image = new BufferedImage(imageSIze, imageSIze, BufferedImage.TYPE_INT_ARGB);
+        BufferedImage image = new BufferedImage(imageSize, imageSize, BufferedImage.TYPE_INT_ARGB);
 
         Graphics2D g = image.createGraphics();
         g.setColor(Color.WHITE);
-        g.fillRect(0, 0, imageSIze, imageSIze);
+        g.fillRect(0, 0, imageSize, imageSize);
         g.setColor(iconColor);
         for (int i = 0; i < 7; i++) {
             for (int j = 0; j < 7; j++) {
@@ -55,12 +55,12 @@ public final class Main {
         boolean[][] iconA = new boolean[7][7];
         boolean[][] iconB = new boolean[7][7];
 
-        int panelCountA;
+        int panelBitA;
         int shiftPanelA = panel;
         for (int i = iconA.length - 1; 3 <= i; i--) {
             for (int j = iconA[0].length - 1; 0 <= j; j--) {
-                panelCountA = shiftPanelA & 1;
-                if (panelCountA == 1) {
+                panelBitA = shiftPanelA & 1;
+                if (panelBitA == 1) {
                     iconA[j][i] = true;
                 }
                 shiftPanelA = shiftPanelA >>> 1;
@@ -71,12 +71,12 @@ public final class Main {
                 iconA[j][i] = iconA[j][6 - i];
             }
         }
-        int panelCountB;
+        int panelBitB;
         int shiftPanelB = panel;
         for (int i = iconB.length - 1; 0 <= i; i--) {
             for (int j = iconB[0].length - 1; 3 <= j; j--) {
-                panelCountB = shiftPanelB & 1;
-                if (panelCountB == 1) {
+                panelBitB = shiftPanelB & 1;
+                if (panelBitB == 1) {
                     iconB[i][j] = true;
                 }
                 shiftPanelB = shiftPanelB >>> 1;
