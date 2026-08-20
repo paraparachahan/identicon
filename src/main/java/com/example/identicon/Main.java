@@ -14,6 +14,28 @@ public final class Main {
     private Main() {
     }
 
+    public static void saveImage(boolean[][] icon, Color iconColor, String imageName) throws IOException {
+        int cellSize = 40;
+        int imageSIze = 9 * cellSize;
+
+        BufferedImage image = new BufferedImage(imageSIze, imageSIze, BufferedImage.TYPE_INT_ARGB);
+
+        Graphics2D g = image.createGraphics();
+        g.setColor(Color.WHITE);
+        g.fillRect(0, 0, imageSIze, imageSIze);
+        g.setColor(iconColor);
+        for (int i = 0; i < 7; i++) {
+            for (int j = 0; j < 7; j++) {
+                if (icon[i][j]) {
+                    g.fillRect((j + 1) * cellSize, (i + 1) * cellSize, cellSize, cellSize);
+                }
+            }
+        }
+        g.dispose();
+
+        ImageIO.write(image, "png", new File(imageName));
+    }
+
     public static void main(String[] args) throws IOException {
 
         Scanner scanner = new Scanner(System.in);
@@ -87,40 +109,7 @@ public final class Main {
 
         Color iconColor = colors[color];
 
-        int cellSize = 40;
-        int imageSIze = 9 * cellSize;
-
-        BufferedImage imageA = new BufferedImage(imageSIze, imageSIze, BufferedImage.TYPE_INT_ARGB);
-
-        Graphics2D g = imageA.createGraphics();
-        g.setColor(Color.WHITE);
-        g.fillRect(0, 0, imageSIze, imageSIze);
-        g.setColor(iconColor);
-        for (int i = 0; i < 7; i++) {
-            for (int j = 0; j < 7; j++) {
-                if (iconA[i][j]) {
-                    g.fillRect((j + 1) * cellSize, (i + 1) * cellSize, cellSize, cellSize);
-                }
-            }
-        }
-        g.dispose();
-
-        ImageIO.write(imageA, "png", new File("iconA.png"));
-
-        BufferedImage imageB = new BufferedImage(imageSIze, imageSIze, BufferedImage.TYPE_INT_ARGB);
-        Graphics2D h = imageB.createGraphics();
-        h.setColor(Color.WHITE);
-        h.fillRect(0, 0, imageSIze, imageSIze);
-        h.setColor(iconColor);
-        for (int i = 0; i < 7; i++) {
-            for (int j = 0; j < 7; j++) {
-                if (iconB[i][j]) {
-                    h.fillRect((j + 1) * cellSize, (i + 1) * cellSize, cellSize, cellSize);
-                }
-            }
-        }
-        h.dispose();
-
-        ImageIO.write(imageB, "png", new File("iconB.png"));
+        saveImage(iconA, iconColor, "iconA.png");
+        saveImage(iconB, iconColor, "iconB.png");
     }
 }
