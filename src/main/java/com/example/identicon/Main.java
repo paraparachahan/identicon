@@ -52,8 +52,8 @@ public final class Main {
 
         int panel = hash >>> 4;
 
-        boolean iconA[][] = new boolean[7][7];
-        boolean iconB[][] = new boolean[7][7];
+        boolean[][] iconA = new boolean[7][7];
+        boolean[][] iconB = new boolean[7][7];
 
         int panelCountA;
         int shiftPanelA = panel;
