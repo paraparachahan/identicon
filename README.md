@@ -140,6 +140,24 @@ iconB.png
 4. 名字と名前を入力
 5. PNGファイルを生成
 ```
+### Headless環境での実行
+
+このプログラムでは、PNG画像を生成するために `BufferedImage` や `Graphics2D` などの `java.awt` 関連クラスを使用しています。
+
+GUI環境のないLinuxサーバーやコンテナ環境などでは、AWTの初期化時にエラーが発生する場合があります。
+
+その場合は、JavaをHeadlessモードで実行してください。
+
+```bash
+java -Djava.awt.headless=true -jar <jarファイル名>.jar
+```
+
+このプログラムではウィンドウなどのGUI表示は行っておらず、AWTはメモリ上でIdenticonを描画し、PNGファイルとして保存するためにのみ使用しています。
+
+> 📝 **補足**
+>
+> WindowsやmacOSなど、通常のデスクトップ環境ではこのオプションが不要な場合があります。  
+> 画面表示環境のない実行環境でAWT関連のエラーが発生した場合に使用してください。
 
 ## Project structure
 
