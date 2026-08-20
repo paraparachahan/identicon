@@ -6,3 +6,4 @@ target/
 .settings/
 iconA.png
 iconB.png
+.DS_Store
