@@ -120,8 +120,8 @@ public final class Main {
 
         Color iconColor = COLORS[colorIndex];
 
-        saveImage(iconA, iconColor, "iconA.png");
-        saveImage(iconB, iconColor, "iconB.png");
+        saveImage(iconA, iconColor, "docs/images/iconA.png");
+        saveImage(iconB, iconColor, "docs/images/iconB.png");
 
         System.out.println("Made it your name Icon!");
     }

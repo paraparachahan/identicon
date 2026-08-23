@@ -34,8 +34,8 @@ Use this name : YAMADA:TARO
 生成されたIdenticon:  
 画像は2種類のパターンが生成されます。
 
-![YAMADA:TARO Identicon A](docs/images/iconA.png)
-![YAMADA:TARO Identicon B](docs/images/iconB.png)
+![YAMADA:TARO Identicon A](docs/images/sampleA.png)
+![YAMADA:TARO Identicon B](docs/images/sampleB.png)
 
 ## How it works
 
