@@ -48,10 +48,10 @@ public final class Main {
         g.setColor(Color.WHITE);
         g.fillRect(0, 0, imageSize, imageSize);
         g.setColor(iconColor);
-        for (int i = 0; i < ICON_SIZE; i++) {
-            for (int j = 0; j < ICON_SIZE; j++) {
-                if (icon[i][j]) {
-                    g.fillRect((j + 1) * CELL_SIZE, (i + 1) * CELL_SIZE, CELL_SIZE, CELL_SIZE);
+        for (int row = 0; row < ICON_SIZE; row++) {
+            for (int column = 0; column < ICON_SIZE; column++) {
+                if (icon[row][column]) {
+                    g.fillRect((column + 1) * CELL_SIZE, (row + 1) * CELL_SIZE, CELL_SIZE, CELL_SIZE);
                 }
             }
         }
@@ -61,9 +61,9 @@ public final class Main {
     }
 
     public static boolean[][] mirrorIcon(boolean[][] icon) {
-        for (int i = 0; i < ICON_SIZE; i++) {
-            for (int j = 0; j < (ICON_SIZE / 2); j++) {
-                icon[i][j] = icon[i][ICON_SIZE - 1 - j];
+        for (int row = 0; row < ICON_SIZE; row++) {
+            for (int column = 0; column < (ICON_SIZE / 2); column++) {
+                icon[row][column] = icon[row][ICON_SIZE - 1 - column];
             }
         }
 
@@ -75,21 +75,21 @@ public final class Main {
         int panelBit;
         int shiftPanel = panel;
         if (pattern == 1) {
-            for (int i = icon.length - 1; (ICON_SIZE / 2) <= i; i--) {
-                for (int j = icon[0].length - 1; 0 <= j; j--) {
+            for (int column = icon.length - 1; (ICON_SIZE / 2) <= column; column--) {
+                for (int row = icon[0].length - 1; 0 <= row; row--) {
                     panelBit = shiftPanel & 1;
                     if (panelBit == 1) {
-                        icon[j][i] = true;
+                        icon[row][column] = true;
                     }
                     shiftPanel = shiftPanel >>> 1;
                 }
             }
         } else {
-            for (int i = icon.length - 1; 0 <= i; i--) {
-                for (int j = icon[0].length - 1; (ICON_SIZE / 2) <= j; j--) {
+            for (int row = icon.length - 1; 0 <= row; row--) {
+                for (int column = icon[0].length - 1; (ICON_SIZE / 2) <= column; column--) {
                     panelBit = shiftPanel & 1;
                     if (panelBit == 1) {
-                        icon[i][j] = true;
+                        icon[row][column] = true;
                     }
                     shiftPanel = shiftPanel >>> 1;
                 }
@@ -105,22 +105,22 @@ public final class Main {
 
         Scanner scanner = new Scanner(System.in);
 
-        String familyName = scanner.nextLine();
-        String givenName = scanner.nextLine();
+        String lastName = scanner.nextLine();
+        String firstName = scanner.nextLine();
 
-        String yourName = familyName.toUpperCase() + ":" + givenName.toUpperCase();
+        String yourName = lastName.toUpperCase() + ":" + firstName.toUpperCase();
         System.out.println(yourName);
 
         int hash = yourName.hashCode();
 
-        int color = hash & 0xF;
+        int colorIndex = hash & 0xF;
 
-        int panel = hash >>> 4;
+        int designPattern = hash >>> 4;
 
-        boolean[][] iconA = generateIcon(panel, 1);
-        boolean[][] iconB = generateIcon(panel, 2);
+        boolean[][] iconA = generateIcon(designPattern, 1);
+        boolean[][] iconB = generateIcon(designPattern, 2);
 
-        Color iconColor = COLORS[color];
+        Color iconColor = COLORS[colorIndex];
 
         saveImage(iconA, iconColor, "iconA.png");
         saveImage(iconB, iconColor, "iconB.png");
