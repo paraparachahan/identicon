@@ -3,6 +3,7 @@ package com.example.identicon;
 import java.util.Scanner;
 
 import javax.imageio.ImageIO;
+import javax.swing.Icon;
 
 import java.awt.Color;
 import java.awt.Graphics2D;
@@ -36,6 +37,47 @@ public final class Main {
         ImageIO.write(image, "png", new File(imageName));
     }
 
+    public static boolean[][] mirrorIcon(boolean[][] icon) {
+        for (int i = 0; i < ICON_SIZE; i++) {
+            for (int j = 0; j < (ICON_SIZE / 2); j++) {
+                icon[i][j] = icon[i][ICON_SIZE - 1 - j];
+            }
+        }
+
+        return icon;
+    }
+
+    public static boolean[][] generateIcon(int panel, int pattern) {
+        boolean[][] icon = new boolean[7][7];
+        int panelBit;
+        int shiftPanel = panel;
+        if (pattern == 1) {
+            for (int i = icon.length - 1; 3 <= i; i--) {
+                for (int j = icon[0].length - 1; 0 <= j; j--) {
+                    panelBit = shiftPanel & 1;
+                    if (panelBit == 1) {
+                        icon[j][i] = true;
+                    }
+                    shiftPanel = shiftPanel >>> 1;
+                }
+            }
+        } else {
+            for (int i = icon.length - 1; 0 <= i; i--) {
+                for (int j = icon[0].length - 1; 3 <= j; j--) {
+                    panelBit = shiftPanel & 1;
+                    if (panelBit == 1) {
+                        icon[i][j] = true;
+                    }
+                    shiftPanel = shiftPanel >>> 1;
+                }
+            }
+        }
+
+        mirrorIcon(icon);
+
+        return icon;
+    }
+
     public static void main(String[] args) throws IOException {
 
         Scanner scanner = new Scanner(System.in);
@@ -52,41 +94,8 @@ public final class Main {
 
         int panel = hash >>> 4;
 
-        boolean[][] iconA = new boolean[7][7];
-        boolean[][] iconB = new boolean[7][7];
-
-        int panelBitA;
-        int shiftPanelA = panel;
-        for (int i = iconA.length - 1; 3 <= i; i--) {
-            for (int j = iconA[0].length - 1; 0 <= j; j--) {
-                panelBitA = shiftPanelA & 1;
-                if (panelBitA == 1) {
-                    iconA[j][i] = true;
-                }
-                shiftPanelA = shiftPanelA >>> 1;
-            }
-        }
-        for (int i = 0; i < 3; i++) {
-            for (int j = 0; j < 7; j++) {
-                iconA[j][i] = iconA[j][6 - i];
-            }
-        }
-        int panelBitB;
-        int shiftPanelB = panel;
-        for (int i = iconB.length - 1; 0 <= i; i--) {
-            for (int j = iconB[0].length - 1; 3 <= j; j--) {
-                panelBitB = shiftPanelB & 1;
-                if (panelBitB == 1) {
-                    iconB[i][j] = true;
-                }
-                shiftPanelB = shiftPanelB >>> 1;
-            }
-        }
-        for (int i = 0; i < 3; i++) {
-            for (int j = 0; j < 7; j++) {
-                iconB[j][i] = iconB[j][6 - i];
-            }
-        }
+        boolean[][] iconA = generateIcon(panel, 1);
+        boolean[][] iconB = generateIcon(panel, 2);
 
         Color[] colors = {
                 new Color(0xD64545),
