@@ -101,11 +101,13 @@ public final class Main {
 
         Scanner scanner = new Scanner(System.in);
 
+        System.out.print("Last  Name : ");
         String lastName = scanner.nextLine();
+        System.out.print("First Name : ");
         String firstName = scanner.nextLine();
 
         String yourName = lastName.toUpperCase() + ":" + firstName.toUpperCase();
-        System.out.println(yourName);
+        System.out.println("Use this name : " + yourName);
 
         int hash = yourName.hashCode();
 
@@ -120,5 +122,7 @@ public final class Main {
 
         saveImage(iconA, iconColor, "iconA.png");
         saveImage(iconB, iconColor, "iconB.png");
+
+        System.out.println("Made it your name Icon!");
     }
 }
