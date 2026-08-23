@@ -3,8 +3,6 @@ package com.example.identicon;
 import java.util.Scanner;
 
 import javax.imageio.ImageIO;
-import javax.swing.Icon;
-
 import java.awt.Color;
 import java.awt.Graphics2D;
 import java.awt.image.BufferedImage;
@@ -60,14 +58,12 @@ public final class Main {
         ImageIO.write(image, "png", new File(imageName));
     }
 
-    public static boolean[][] mirrorIcon(boolean[][] icon) {
+    public static void mirrorIcon(boolean[][] icon) {
         for (int row = 0; row < ICON_SIZE; row++) {
             for (int column = 0; column < (ICON_SIZE / 2); column++) {
                 icon[row][column] = icon[row][ICON_SIZE - 1 - column];
             }
         }
-
-        return icon;
     }
 
     public static boolean[][] generateIcon(int panel, int pattern) {
