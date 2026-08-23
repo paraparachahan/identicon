@@ -31,7 +31,8 @@ First Name : TARO
 Use this name : YAMADA:TARO
 ```
 
-生成されたIdenticon:
+生成されたIdenticon:  
+画像は2種類のパターンが生成されます。
 
 ![YAMADA:TARO Identicon A](docs/images/iconA.png)
 ![YAMADA:TARO Identicon B](docs/images/iconB.png)
